@@ -14,6 +14,6 @@ public class Recherche extends JPanel {
 	super(new FlowLayout());
 	this.add(new JLabel("Recherche : "));
 	this.add(new JTextField(30));
-	this.add(new JButton("Rechercher"));
+	this.add(new JButton("Rechercher").addActionListener(new RechercheListener()));
     }
 }
