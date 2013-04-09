@@ -16,6 +16,7 @@ public class FenetrePrincipale extends JFrame {
 	fonctionnalites.add("Itinéraire", new Itineraire());
 	getContentPane().add(fonctionnalites);
 	pack();
+	setLocationRelativeTo(null);
 	setVisible(true);
     }
 }
