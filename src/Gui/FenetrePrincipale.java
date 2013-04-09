@@ -11,6 +11,7 @@ public class FenetrePrincipale extends JFrame {
     FenetrePrincipale() {
 	super("TransParix");
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	setJMenuBar(new MenuPrincipal());
 	fonctionnalites = new JTabbedPane();
 	fonctionnalites.add("Rechercher", new Recherche());
 	fonctionnalites.add("Itinéraire", new Itineraire());
