@@ -37,6 +37,7 @@ public class Recherche extends JPanel implements ItemListener {
 	cards = new JPanel(new CardLayout());
 	cards.add(new RechercheText(), TEXTUELLE);
 	cards.add(new RechercheList(), LIGNE);
+	cards.add(new RechercheApprox(), APPROX);
 
 	/* Ajout au panel courant */
 	setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
