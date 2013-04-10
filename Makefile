@@ -8,3 +8,6 @@ clean : clean_gui
 
 clean_gui :
 	rm -rf ../bin/Gui/*
+
+exec :
+	java -cp ./bin Gui.Main
