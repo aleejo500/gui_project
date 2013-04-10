@@ -20,7 +20,7 @@ public class RechercheList extends JPanel {
 
 	stations.setLayout(new BoxLayout(stations, BoxLayout.Y_AXIS));
 	stations.add(new JLabel("Nom de la station"));
-	stations.add(new JScrollPane(new LigneList()));
+	stations.add(new JScrollPane(new StationList()));
 
 	add(lignes);
 	add(stations);
