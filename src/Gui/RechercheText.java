@@ -1,6 +1,5 @@
 package Gui;
 
-import java.awt.FlowLayout;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -16,15 +15,14 @@ public class RechercheText extends JPanel {
 
     /** Constructeur sans argument */
     public RechercheText () {
-	super(new FlowLayout());
+		/* Création des composants */
+		searchButton = new JButton("Rechercher");
+		searchButton.addActionListener(new RechercheListener());
+		searchField = new JTextField(30);
 
-	searchButton = new JButton("Rechercher");
-	searchButton.addActionListener(new RechercheListener());
-	searchField = new JTextField(30);
-
-	/* Ajout des composants */
-	add(new JLabel("Recherche : "));
-	add(searchField);
-	add(searchButton);
+		/* Ajout des composants */
+		add(new JLabel("Station : "));
+		add(searchField);
+		add(searchButton);
     }
 }
