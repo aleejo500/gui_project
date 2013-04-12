@@ -6,6 +6,6 @@ import java.awt.event.ActionEvent;
 public class RechercheListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
-	System.out.println("Va chercher !");
+	System.out.println("Va chercher la station !");
     }
 }
