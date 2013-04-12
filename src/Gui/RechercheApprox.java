@@ -17,7 +17,7 @@ public class RechercheApprox extends JPanel {
     public RechercheApprox () {
 		/* Création des composants */
 		searchButton = new JButton("Rechercher");
-		searchButton.addActionListener(new RechercheListener());
+		searchButton.addActionListener(new RechercheApproxListener());
 		searchField = new JTextField(30);
 
 		/* Ajout des composants */
