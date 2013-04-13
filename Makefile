@@ -7,7 +7,7 @@ all :
 clean : clean_gui
 
 clean_gui :
-	rm -rf ../bin/Gui/*
+	rm -rvf $(BIN)/Gui/*
 
 exec :
-	java -cp ./bin Gui.Main
+	java -cp $(BIN) Gui.Main
