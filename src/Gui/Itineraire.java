@@ -1,6 +1,6 @@
 package Gui;
 
-import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -18,19 +18,24 @@ public class Itineraire extends JPanel {
 
     /** Constructeur sans argument */
     public Itineraire () {
-	/* On applique le FlowLayout à notre JComponent */
-	super(new FlowLayout());
-
+	setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+	
 	itineraireButton = new JButton("Tappe moi !");
 	itineraireButton.addActionListener(new ItineraireListener());
 
 	departField = new JTextField(30);
 	arriveeField = new JTextField(30);
 
-	add(new JLabel("Départ : "));
-	add(departField);
-	add(new JLabel("Arrivée : "));
-	add(arriveeField);
+	JPanel depart = new JPanel();
+	depart.add(new JLabel("Départ : "));
+	depart.add(departField);
+
+	JPanel arrive = new JPanel();
+	arrive.add(new JLabel("Arrivée : "));
+	arrive.add(arriveeField);
+
+	add(depart);
+	add(arrive);
 	add(itineraireButton);
     }
 }
