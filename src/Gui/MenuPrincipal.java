@@ -1,5 +1,6 @@
 package Gui;
 
+import java.util.ResourceBundle;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -11,9 +12,12 @@ public class MenuPrincipal extends JMenuBar {
     /** Constructeur sans argument */
     public MenuPrincipal() {
 	super();
-	JMenu file = new JMenu("Fichier");
 
-	JMenuItem quit = new JMenuItem("Quitter");
+	ResourceBundle texts = ResourceBundle.getBundle("MenuBundle");
+
+	JMenu file = new JMenu(texts.getString("file"));
+
+	JMenuItem quit = new JMenuItem(texts.getString("quit"));
 	quit.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 		    System.exit(0);
