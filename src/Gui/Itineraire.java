@@ -1,5 +1,6 @@
 package Gui;
 
+import java.util.ResourceBundle;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -20,18 +21,21 @@ public class Itineraire extends JPanel {
     public Itineraire () {
 	setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	
-	itineraireButton = new JButton("Tappe moi !");
+	ResourceBundle label = ResourceBundle.getBundle("LabelBundle");
+	ResourceBundle button = ResourceBundle.getBundle("ButtonBundle");
+
+	itineraireButton = new JButton(button.getString("itinerarySearchButton"));
 	itineraireButton.addActionListener(new ItineraireListener());
 
 	departField = new JTextField(30);
 	arriveeField = new JTextField(30);
 
 	JPanel depart = new JPanel();
-	depart.add(new JLabel("Départ : "));
+	depart.add(new JLabel(label.getString("itineraryDepatureLabel")));
 	depart.add(departField);
 
 	JPanel arrive = new JPanel();
-	arrive.add(new JLabel("Arrivée : "));
+	arrive.add(new JLabel(label.getString("itineraryArrivalLabel")));
 	arrive.add(arriveeField);
 
 	add(depart);

@@ -1,5 +1,6 @@
 package Gui;
 
+import java.util.ResourceBundle;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -15,14 +16,18 @@ public class RechercheText extends JPanel {
 
     /** Constructeur sans argument */
     public RechercheText () {
-		/* Création des composants */
-		searchButton = new JButton("Rechercher");
-		searchButton.addActionListener(new RechercheListener());
-		searchField = new JTextField(30);
+	/* Ajout des ressource bundle */
+	ResourceBundle label = ResourceBundle.getBundle("LabelBundle");
+       	ResourceBundle button = ResourceBundle.getBundle("ButtonBundle");
 
-		/* Ajout des composants */
-		add(new JLabel("Station : "));
-		add(searchField);
-		add(searchButton);
+	/* Création des composants */
+	searchButton = new JButton(button.getString("textSearchButton"));
+	searchButton.addActionListener(new RechercheListener());
+	searchField = new JTextField(30);
+	
+	/* Ajout des composants */
+	add(new JLabel(label.getString("textSearchLabel")));
+	add(searchField);
+	add(searchButton);
     }
 }

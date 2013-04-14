@@ -1,5 +1,6 @@
 package Gui;
 
+import java.util.ResourceBundle;
 import java.awt.CardLayout;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
@@ -13,13 +14,18 @@ import javax.swing.BoxLayout;
 /** Panel correspondant à l'onglet 
     de recherche d'une station de metro */
 public class Recherche extends JPanel implements ItemListener {
-    final static String TEXTUELLE = "Nom de station";
-    final static String LIGNE = "Numéro de ligne";
-    final static String APPROX = "Localisation approximative";
     private JPanel cards;
 
     /** Constructeur sans argument */
     public Recherche () {
+	/* Chargement des ResourceBundle */
+	ResourceBundle comboText = ResourceBundle.getBundle("ComboTxtBundle");
+	ResourceBundle label = ResourceBundle.getBundle("LabelBundle");
+
+	String TEXTUELLE = comboText.getString("text");
+	String LIGNE = comboText.getString("ligne");
+	String APPROX = comboText.getString("approx");
+
 	/* Creation de la combo box */
 	JPanel comboBoxPane = new JPanel();
 	String [] cbitems = {TEXTUELLE, LIGNE, APPROX};
@@ -30,7 +36,7 @@ public class Recherche extends JPanel implements ItemListener {
 
 	/* JPanel de la selection */
 	JPanel select = new JPanel();
-	select.add(new JLabel("Selectionnez le type de recherche : "));
+	select.add(new JLabel(label.getString("comboBoxLabel")));
 	select.add(comboBoxPane);
 
 	/* Panel de la fonction de recherche */

@@ -1,5 +1,6 @@
 package Gui;
 
+import java.util.ResourceBundle;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -15,14 +16,18 @@ public class RechercheApprox extends JPanel {
 
     /** Constructeur sans argument */
     public RechercheApprox () {
-		/* Création des composants */
-		searchButton = new JButton("Rechercher");
-		searchButton.addActionListener(new RechercheApproxListener());
-		searchField = new JTextField(30);
+	/*  */
+	ResourceBundle button = ResourceBundle.getBundle("ButtonBundle");
+	ResourceBundle label = ResourceBundle.getBundle("LabelBundle");
 
-		/* Ajout des composants */
-		add(new JLabel("Localisation : "));
-		add(searchField);
-		add(searchButton);
+	/* Création des composants */
+	searchButton = new JButton(button.getString("approxSearchButton"));
+	searchButton.addActionListener(new RechercheApproxListener());
+	searchField = new JTextField(30);
+	
+	/* Ajout des composants */
+	add(new JLabel(label.getString("approxSearchLabel")));
+	add(searchField);
+	add(searchButton);
     }
 }
