@@ -18,8 +18,8 @@ public class StationList extends JList<String> {
 	try{ 
 	    Conection con=new Conection();
 	    
-	    ResultSet rs = con.Requete1();
-	    while (rs.next()){
+	    ResultSet rs = con.getMetroStations();
+	    while (rs.next()) {
 		String name = rs.getString("nom");
 		listModel.addElement(name);
 	    }    
