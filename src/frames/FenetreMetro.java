@@ -2,13 +2,14 @@ package frames;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import panels.PlanMetro;
 
 /** Classe qui affiche le plan du metro */
 public class FenetreMetro extends JFrame {
     /** Constructeur */
     public FenetreMetro() {
 	setTitle("Plan du métro");
-	add(new JLabel("Prochainement ici il y aura le plan du métro parisien :)"));
+	getContentPane().add(new PlanMetro(1000, 600));
 	pack();
 	setLocationRelativeTo(null);
 	setVisible(true);

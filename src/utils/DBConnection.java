@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.LinkedList;
 import org.postgresql.Driver;
 
 public class DBConnection {
@@ -46,12 +47,98 @@ public class DBConnection {
 	return rs;
     }
 
-    public ResultSet getMetroStations() 
+    /** Les stations de metro */
+    public LinkedList<Station> getMetroStations() 
 	throws SQLException, ClassNotFoundException {
 	selectStmt = con.prepareStatement(
-		    "SELECT nom, latitude, longitude " +
+		    "SELECT * " +
 		    "FROM station " +
 		    "WHERE type = 'metro';");
-	return selectStmt.executeQuery();
+	ResultSet results = selectStmt.executeQuery();
+	LinkedList<Station> stations = new LinkedList<Station>();
+	while(results.next()) {
+	    stations.add(new Station(results.getInt("id"),
+				     results.getDouble("latitude"),
+				     results.getDouble("longitude"),
+				     results.getString("nom"),
+				     results.getString("commune"),
+				     results.getString("type")
+				     ));
+	}
+	return stations;
+    }
+
+    /** Les lignes de metro */
+    public LinkedList<Ligne> getMetroLignes() 
+	throws SQLException, ClassNotFoundException {
+	selectStmt = con.prepareStatement(
+		    "SELECT * " +
+		    "FROM lignes " +
+		    "WHERE type = 'metro';");
+	ResultSet results = selectStmt.executeQuery();
+	LinkedList<Ligne> lignes = new LinkedList<Ligne>();
+	while(results.next()) {
+	    lignes.add(new Ligne(results.getInt("id"),
+				 results.getString("numero"),
+				 results.getString("type")
+				 ));
+	}
+	return lignes;
+    }
+
+    public double getMinX() 
+	throws SQLException, ClassNotFoundException {
+	selectStmt = con.prepareStatement(
+		    "SELECT min(longitude) " +
+		    "FROM station " +
+		    "WHERE type='metro';");
+	ResultSet results = selectStmt.executeQuery();
+	if(results.next()) {
+	    return results.getDouble(1);
+	} else {
+	    return 0;
+	}
+    }
+
+    public double getMinY() 
+	throws SQLException, ClassNotFoundException {
+	selectStmt = con.prepareStatement(
+		    "SELECT min(latitude) " +
+		    "FROM station " +
+		    "WHERE type='metro';");
+	ResultSet results = selectStmt.executeQuery();
+	if(results.next()) {
+	    return results.getDouble(1);
+	} else {
+	    return 0;
+	}
+    }
+
+    public double getMaxX() 
+	throws SQLException, ClassNotFoundException {
+	selectStmt = con.prepareStatement(
+		    "SELECT max(longitude) " +
+		    "FROM station " +
+		    "WHERE type='metro';");
+	ResultSet results = selectStmt.executeQuery();
+	if(results.next()) {
+	    return results.getDouble(1);
+	} else {
+	    return 0;
+	}
+    }
+
+    public double getMaxY() 
+	throws SQLException, ClassNotFoundException {
+	selectStmt = con.prepareStatement(
+		    "SELECT max(latitude) " +
+		    "FROM station " +
+		    "WHERE type='metro';");
+	ResultSet results = selectStmt.executeQuery();
+	if(results.next()) {
+	    return results.getDouble(1);
+	} else {
+	    return 0;
+	}
     }
 }
