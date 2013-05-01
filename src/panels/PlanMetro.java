@@ -57,7 +57,7 @@ public class PlanMetro extends JPanel {
 		    new Double(Math.abs(width * (x - xmin) / (xmax - xmin))
 			       ).intValue();
 		int newy = 
-		    new Double(Math.abs(height * (y - ymin) / (ymax - ymin))
+		    new Double(Math.abs(height * (ymax - y) / (ymax - ymin))
 			       ).intValue();
 		System.out.println(newx + " " + newy);
 		JCheckBox jcb = new JCheckBox();
