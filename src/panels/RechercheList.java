@@ -1,8 +1,8 @@
 package panels;
 
 import java.util.ResourceBundle;
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
@@ -14,20 +14,38 @@ import gui.StationList;
 public class RechercheList extends JPanel {
     /** Constructeur sans argument */
     public RechercheList() {
-	JPanel lignes = new JPanel();
-	JPanel stations = new JPanel();
+	setLayout(new GridBagLayout());
+	GridBagConstraints c = new GridBagConstraints();
 
 	ResourceBundle label = ResourceBundle.getBundle("LabelBundle");
 
-	lignes.setLayout(new BoxLayout(lignes, BoxLayout.Y_AXIS));
-	lignes.add(new JLabel(label.getString("listSearchLineLabel")));
-	lignes.add(new JScrollPane(new LigneList()));
 
-	stations.setLayout(new BoxLayout(stations, BoxLayout.Y_AXIS));
-	stations.add(new JLabel(label.getString("listSearchStationLabel")));
-	stations.add(new JScrollPane(new StationList()));
+	JLabel ligneLabel = 
+	    new JLabel(label.getString("listSearchLineLabel"));
+	JScrollPane ligneList = new JScrollPane(new LigneList());
 
-	add(lignes);
-	add(stations);
+	JLabel stationLabel = 
+	    new JLabel(label.getString("listSearchStationLabel"));
+	JScrollPane stationList = new JScrollPane(new StationList());
+
+	c.gridx = 0;
+	c.gridy = 0;
+	c.fill = GridBagConstraints.BOTH;
+	add(ligneLabel, c);
+
+	c.gridx = 1;
+	c.gridy = 0;
+	c.fill = GridBagConstraints.BOTH;
+	add(stationLabel, c);
+
+	c.gridx = 0;
+	c.gridy = 1;
+	c.fill = GridBagConstraints.BOTH;
+	add(ligneList, c);
+
+	c.gridx = 1;
+	c.gridy = 1;
+	c.fill = GridBagConstraints.BOTH;
+	add(stationList, c);
     }
 }
