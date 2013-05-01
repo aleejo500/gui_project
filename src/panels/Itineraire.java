@@ -1,7 +1,8 @@
 package panels;
 
 import java.util.ResourceBundle;
-import javax.swing.BoxLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -20,7 +21,8 @@ public class Itineraire extends JPanel {
 
     /** Constructeur sans argument */
     public Itineraire () {
-	setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+	setLayout(new GridBagLayout());
+	GridBagConstraints c = new GridBagConstraints();
 	
 	ResourceBundle label = ResourceBundle.getBundle("LabelBundle");
 	ResourceBundle button = ResourceBundle.getBundle("ButtonBundle");
@@ -31,16 +33,34 @@ public class Itineraire extends JPanel {
 	departField = new JTextField(30);
 	arriveeField = new JTextField(30);
 
-	JPanel depart = new JPanel();
-	depart.add(new JLabel(label.getString("itineraryDepatureLabel")));
-	depart.add(departField);
 
-	JPanel arrive = new JPanel();
-	arrive.add(new JLabel(label.getString("itineraryArrivalLabel")));
-	arrive.add(arriveeField);
+	JLabel departLabel = new JLabel(label.getString("itineraryDepatureLabel"));
+	JLabel arriveeLabel = new JLabel(label.getString("itineraryArrivalLabel"));
 
-	add(depart);
-	add(arrive);
-	add(itineraireButton);
+	c.gridx = 0;
+	c.gridy = 0;
+	c.fill = GridBagConstraints.BOTH;
+	add(departLabel, c);
+
+	c.gridx = 1;
+	c.gridy = 0;
+	c.fill = GridBagConstraints.BOTH;
+	add(departField, c);
+
+	c.gridx = 0;
+	c.gridy = 1;
+	c.fill = GridBagConstraints.BOTH;
+	add(arriveeLabel, c);
+
+	c.gridx = 1;
+	c.gridy = 1;
+	c.fill = GridBagConstraints.BOTH;
+	add(arriveeField, c);
+
+	c.gridx = 0;
+	c.gridy = 2;
+	c.gridwidth = 2;
+	c.fill = GridBagConstraints.BOTH;
+	add(itineraireButton, c);
     }
 }
