@@ -41,7 +41,7 @@ public class PlanMetro extends JPanel {
 	}
     }
 
-    /**  */
+    /** Méthode qui place les stations sur le panel */
     private void drawStations(DBConnection con) {
 	try {
 	    double xmin = con.getMinX();
@@ -59,9 +59,9 @@ public class PlanMetro extends JPanel {
 		int newy = 
 		    new Double(Math.abs(height * (ymax - y) / (ymax - ymin))
 			       ).intValue();
-		System.out.println(newx + " " + newy);
+
 		JCheckBox jcb = new JCheckBox();
-		jcb.setBounds(newx, newy, 15, 15);
+		jcb.setBounds(newx - 10, newy - 10, 20, 20);
 		this.add(jcb);
 	    }
 	} catch(Exception e) {
