@@ -2,6 +2,7 @@ package utils;
 
 /** Classe modélisant une station de metro */
 public class Station {
+
     /** Identifiant de la station */
     private int id;
     /** Latitude de la station */
@@ -16,26 +17,26 @@ public class Station {
     private String type;
 
     /** Constructeur */
-    public Station(int id, double latitude, double longitude, 
-		   String nom, String commune, String type) {
-	this.id = id;
-	this.latitude = latitude;
-	this.longitude = longitude;
-	this.nom = nom;
-	this.commune = commune;
-	this.type = type;
+    public Station(int id, double latitude, double longitude,
+            String nom, String commune, String type) {
+        this.id = id;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.nom = nom;
+        this.commune = commune;
+        this.type = type;
     }
 
     /** Retourne le nom de la station */
     public String getNom() {
-	return nom;
+        return nom;
     }
 
     public double getX() {
-	return longitude;
+        return longitude;
     }
 
     public double getY() {
-	return latitude;
+        return latitude;
     }
 }
