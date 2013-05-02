@@ -6,8 +6,8 @@ import java.awt.GridBagConstraints;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
-import gui.LigneList;
-import gui.StationList;
+import components.LigneList;
+import components.StationList;
 
 /** Panel correspondant à une recherche en 
 selectionnant dans une JList */
