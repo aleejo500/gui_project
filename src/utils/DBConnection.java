@@ -33,12 +33,14 @@ public class DBConnection {
 
     public ResultSet Requete1()
             throws SQLException, ClassNotFoundException, Exception {
-        //selectStmt = con.prepareStatement("select * from lignes where type='bus'");
-        //selectStmt = con.prepareStatement("select * from lignes where numero like '14%' and type='metro'");    
-        selectStmt = con.prepareStatement(
-                "SELECT lignes.numero,station.nom,station.commune,lignes.type "
-                + "FROM lignes, station "
-                + "WHERE lignes.id = station.id and lignes.type='metro';");
+        /* Construction de la requete */
+        StringBuilder stmt = new StringBuilder();
+        stmt.append("SELECT lignes.numero,station.nom,station.commune,lignes.type ");
+        stmt.append("FROM lignes, station ");
+        stmt.append("WHERE lignes.id = station.id and lignes.type='metro';");
+        
+        /* Execution et traitement de la requete */
+        selectStmt = con.prepareStatement(stmt.toString());
         ResultSet rs = selectStmt.executeQuery();
         return rs;
     }
@@ -46,10 +48,14 @@ public class DBConnection {
     /** Les stations de metro */
     public LinkedList<Station> getMetroStations()
             throws SQLException, ClassNotFoundException {
-        selectStmt = con.prepareStatement(
-                "SELECT * "
-                + "FROM station "
-                + "WHERE type = 'metro';");
+        /* Construction de la requete */
+        StringBuilder stmt = new StringBuilder();
+        stmt.append("SELECT * ");
+        stmt.append("FROM station ");
+        stmt.append("WHERE type = 'metro';");
+        
+        /* Execution et traitement de la requete */
+        selectStmt = con.prepareStatement(stmt.toString());
         ResultSet results = selectStmt.executeQuery();
         LinkedList<Station> stations = new LinkedList<Station>();
         while (results.next()) {
@@ -63,29 +69,48 @@ public class DBConnection {
         return stations;
     }
 
-    /** Les lignes de metro */
+    /**
+     * Récupère les lignes de métro depuis la base de donnée.
+     * @return Une liste des lignes de métro.
+     * @throws SQLException Lorsque la requête SQL échoue.
+     * @throws ClassNotFoundException Lorsque une classe n'est pas trouvée.
+     */
     public LinkedList<Ligne> getMetroLignes()
             throws SQLException, ClassNotFoundException {
-        selectStmt = con.prepareStatement(
-                "SELECT * "
-                + "FROM lignes "
-                + "WHERE type = 'metro';");
+        /* Construction de la requete */
+        StringBuilder stmt = new StringBuilder();
+        stmt.append("SELECT DISTINCT numero, type ");
+        stmt.append("FROM lignes ");
+        stmt.append("WHERE type = 'metro' ");
+        stmt.append("ORDER BY numero ASC ;");
+        
+        /* Execution et traitement de la requete */
+        selectStmt = con.prepareStatement(stmt.toString());
         ResultSet results = selectStmt.executeQuery();
         LinkedList<Ligne> lignes = new LinkedList<Ligne>();
         while (results.next()) {
-            lignes.add(new Ligne(results.getInt("id"),
-                    results.getString("numero"),
+            lignes.add(new Ligne(results.getString("numero"), 
                     results.getString("type")));
         }
         return lignes;
     }
 
+    /**
+     * Récupère La latitude minimum de la base de donnée.
+     * @return La latitude minimum
+     * @throws SQLException Requête SQL qui échoue.
+     * @throws ClassNotFoundException Une classe n'est pas trouvée.
+     */
     public double getMinX()
             throws SQLException, ClassNotFoundException {
-        selectStmt = con.prepareStatement(
-                "SELECT min(longitude) "
-                + "FROM station "
-                + "WHERE type='metro';");
+        /* Construction de la requete */
+        StringBuilder stmt = new StringBuilder();
+        stmt.append("SELECT min(longitude) ");
+        stmt.append("FROM station ");
+        stmt.append("WHERE type = 'metro'; ");
+        
+        /* Execution et traitement de la requete */
+        selectStmt = con.prepareStatement(stmt.toString());
         ResultSet results = selectStmt.executeQuery();
         if (results.next()) {
             return results.getDouble(1);
@@ -96,10 +121,14 @@ public class DBConnection {
 
     public double getMinY()
             throws SQLException, ClassNotFoundException {
-        selectStmt = con.prepareStatement(
-                "SELECT min(latitude) "
-                + "FROM station "
-                + "WHERE type='metro';");
+        /* Construction de la requete */
+        StringBuilder stmt = new StringBuilder();
+        stmt.append("SELECT min(latitude) ");
+        stmt.append("FROM station ");
+        stmt.append("WHERE type = 'metro'; ");
+        
+        /* Execution et traitement de la requete */
+        selectStmt = con.prepareStatement(stmt.toString());
         ResultSet results = selectStmt.executeQuery();
         if (results.next()) {
             return results.getDouble(1);
@@ -110,10 +139,14 @@ public class DBConnection {
 
     public double getMaxX()
             throws SQLException, ClassNotFoundException {
-        selectStmt = con.prepareStatement(
-                "SELECT max(longitude) "
-                + "FROM station "
-                + "WHERE type='metro';");
+        /* Construction de la requete */
+        StringBuilder stmt = new StringBuilder();
+        stmt.append("SELECT max(longitude) ");
+        stmt.append("FROM station ");
+        stmt.append("WHERE type = 'metro'; ");
+        
+        /* Execution et traitement de la requete */
+        selectStmt = con.prepareStatement(stmt.toString());
         ResultSet results = selectStmt.executeQuery();
         if (results.next()) {
             return results.getDouble(1);
@@ -124,10 +157,14 @@ public class DBConnection {
 
     public double getMaxY()
             throws SQLException, ClassNotFoundException {
-        selectStmt = con.prepareStatement(
-                "SELECT max(latitude) "
-                + "FROM station "
-                + "WHERE type='metro';");
+        /* Construction de la requete */
+        StringBuilder stmt = new StringBuilder();
+        stmt.append("SELECT max(latitude) ");
+        stmt.append("FROM station ");
+        stmt.append("WHERE type = 'metro'; ");
+        
+        /* Execution et traitement de la requete */
+        selectStmt = con.prepareStatement(stmt.toString());
         ResultSet results = selectStmt.executeQuery();
         if (results.next()) {
             return results.getDouble(1);
