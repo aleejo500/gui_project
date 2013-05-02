@@ -24,7 +24,7 @@ public class LigneList extends JList<String> {
             DBConnection con = new DBConnection();
             lignes = con.getMetroLignes();
             while (!lignes.isEmpty()) {
-                listModel.addElement(lignes.pop().getNom());
+                listModel.addElement(lignes.pop().getId());
             }
         } catch (SQLException ex) {
             Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
