@@ -1,7 +1,6 @@
 package panels;
 
 import javax.swing.JPanel;
-import javax.swing.JCheckBox;
 import java.util.LinkedList;
 import java.awt.Dimension;
 import java.sql.SQLException;
@@ -9,20 +8,34 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import utils.DBConnection;
 import utils.Station;
+import components.StationComponent;
 
-/** Image du métro parisien */
+/**
+ * Image du métro parisien
+ */
 public class PlanMetro extends JPanel {
 
-    /** La longueur de l'image */
+    /**
+     * La longueur de l'image
+     */
     private int width;
-    /** La hauteur de l'image */
+    /**
+     * La hauteur de l'image
+     */
     private int height;
-    /** Les stations à afficher */
+    /**
+     * Les stations à afficher
+     */
     private LinkedList<Station> stations;
 
-    /** Constructeur */
+    /**
+     * Constructeur
+     */
     public PlanMetro(int width, int height) {
+        /* Placement des éléments manuellement,
+         * donc pas de layout !*/
         setLayout(null);
+
         /* Init des attributs */
         this.width = width;
         this.height = height;
@@ -41,7 +54,9 @@ public class PlanMetro extends JPanel {
         }
     }
 
-    /** Méthode qui place les stations sur le panel */
+    /**
+     * Méthode qui place les stations sur le panel
+     */
     private void drawStations(DBConnection con) {
         try {
             double xmin = con.getMinX();
@@ -58,9 +73,8 @@ public class PlanMetro extends JPanel {
                 int newy =
                         new Double(Math.abs(height * (ymax - y) / (ymax - ymin))).intValue();
 
-                JCheckBox jcb = new JCheckBox();
-                jcb.setBounds(newx - 10, newy - 10, 20, 20);
-                this.add(jcb);
+                StationComponent st = new StationComponent(newx, newy);
+                add(st);
             }
         } catch (Exception e) {
             System.err.println(e);
