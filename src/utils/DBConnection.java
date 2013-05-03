@@ -21,7 +21,7 @@ public class DBConnection {
             throws ClassNotFoundException, SQLException, Exception {
         Class.forName("org.postgresql.Driver");
         con = DriverManager.getConnection(
-                "jdbc:postgresql://localhost:5432/RATP", "amidouch", "izan2112!");
+                "jdbc:postgresql://localhost:5433/ratp", "glav", "123");
     }
 
     public void FCLOSEconecta() throws ClassNotFoundException, SQLException {
@@ -31,19 +31,20 @@ public class DBConnection {
         }
     }
 
-    public ResultSet Requete1()
+  public ResultSet Requete_comm()
             throws SQLException, ClassNotFoundException, Exception {
         /* Construction de la requete */
         StringBuilder stmt = new StringBuilder();
-        stmt.append("SELECT lignes.numero,station.nom,station.commune,lignes.type ");
-        stmt.append("FROM lignes, station ");
-        stmt.append("WHERE lignes.id = station.id and lignes.type='metro';");
+        stmt.append("SELECT DISTINCT commune ");
+        stmt.append("FROM station ");
+        stmt.append("WHERE type='metro'ORDER BY commune ASC ;;");
         
         /* Execution et traitement de la requete */
         selectStmt = con.prepareStatement(stmt.toString());
         ResultSet rs = selectStmt.executeQuery();
         return rs;
     }
+
 
     /** Les stations de metro */
     public LinkedList<Station> getMetroStations()
@@ -172,4 +173,28 @@ public class DBConnection {
             return 0;
         }
     }
+     
+    public LinkedList getMetroStations_commune(String par)
+            throws SQLException, ClassNotFoundException {
+        /* Construction de la requete */
+        StringBuilder stmt = new StringBuilder();
+        stmt.append("SELECT * ");
+        stmt.append("FROM station ");
+        stmt.append("WHERE type = 'metro' and commune = '"+par+ "';");
+        
+        /* Execution et traitement de la requete */
+        selectStmt = con.prepareStatement(stmt.toString());
+        ResultSet results = selectStmt.executeQuery();
+        LinkedList<Station> stations = new LinkedList<Station>();
+        while (results.next()) {
+            stations.add(new Station(results.getInt("id"),
+                    results.getDouble("latitude"),
+                    results.getDouble("longitude"),
+                    results.getString("nom"),
+                    results.getString("commune"),
+                    results.getString("type")));
+        }
+        return stations;
+    }
+    
 }

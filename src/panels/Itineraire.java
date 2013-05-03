@@ -19,9 +19,9 @@ public class Itineraire extends JPanel {
     /** Bouton qui permet de lancer la recherche d'itinéraire */
     private JButton itineraireButton;
     /** Champ de texte qui permet d'entrer le départ */
-    private JComboBox<String> departField;
+    private JComboBox departField;
     /** Champ de texte qui permet d'entrer l'arrivé */
-    private JComboBox<String> arriveeField;
+    private JComboBox arriveeField;
 
     /** Constructeur sans argument */
     public Itineraire() {
