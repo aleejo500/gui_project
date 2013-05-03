@@ -7,7 +7,9 @@ package listeners;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
+import java.text.Collator;
 import java.util.LinkedList;
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -54,8 +56,26 @@ public class SearchStationListener extends KeyAdapter {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        String srch = ((JTextField) search.getEditor().getEditorComponent())
-                .getText();
+        if ((e.getKeyCode() != KeyEvent.VK_UP)
+                && (e.getKeyCode() != KeyEvent.VK_DOWN)
+                && (e.getKeyCode() != KeyEvent.VK_ENTER)) {
+            String srch = ((JTextField) search.getEditor().getEditorComponent())
+                    .getText();
+            search.setModel(filterStations(srch));
+            search.setPopupVisible(false);
+            if (!srch.isEmpty()) {
+                search.setPopupVisible(true);
+            }
+        }
+    }
+
+    /**
+     * Filtre les stations pour ne garder que celles qui correspondent à la
+     * recherche.
+     * @param srch La recherche entrée par l'utilisateur
+     * @return Un ComboBoxModel contenant les stations retenues
+     */
+    private ComboBoxModel<String> filterStations(String srch) {
         DefaultComboBoxModel<String> model;
         model = DefaultComboBoxModel.class.cast(search.getModel());
 
@@ -63,18 +83,34 @@ public class SearchStationListener extends KeyAdapter {
         model.addElement(srch);
         if (srch.length() > 2) {
             for (Station st : stations) {
-                String lowst = st.getNom().toLowerCase();
-                String lowsrch = srch.toLowerCase();
-                if ((lowst.startsWith(lowsrch))
-                        && (!st.getNom().equals(srch))) {
+                if (SearchStationListener.areAlike(srch, st.getNom())) {
                     model.addElement(st.getNom());
                 }
             }
         }
-        search.setModel(model);
-        search.setPopupVisible(false);
-        if(!srch.isEmpty()) {
-            search.setPopupVisible(true);
+        
+        return model;
+    }
+
+    /**
+     * Compare deux chaines de caractère pour voir si elles sont semblables.
+     *
+     * @param src La chaine source
+     * @param dest La chaine destination
+     * @return Un booléen qui indique si les chaines sont semblables ou non
+     */
+    private static boolean areAlike(String src, String dest) {
+        /* Configuration de la force de comparaison */
+        Collator mycoll = Collator.getInstance();
+        mycoll.setStrength(Collator.PRIMARY);
+
+        /* Comparaison */
+        if ((mycoll.compare(src,
+                dest.substring(0, Math.min(dest.length(), src.length()))) == 0)
+                && (!dest.equals(src))) {
+            return true;
         }
+
+        return false;
     }
 }
