@@ -56,8 +56,9 @@ public class SearchStationListener extends KeyAdapter {
     public void keyReleased(KeyEvent e) {
         String srch = ((JTextField) search.getEditor().getEditorComponent())
                 .getText();
-        DefaultComboBoxModel<String> model =
-                (DefaultComboBoxModel<String>) search.getModel();
+        DefaultComboBoxModel<String> model;
+        model = DefaultComboBoxModel.class.cast(search.getModel());
+
         model.removeAllElements();
         model.addElement(srch);
         if (srch.length() > 2) {
@@ -72,6 +73,8 @@ public class SearchStationListener extends KeyAdapter {
         }
         search.setModel(model);
         search.setPopupVisible(false);
-        search.setPopupVisible(true);
+        if(!srch.isEmpty()) {
+            search.setPopupVisible(true);
+        }
     }
 }
